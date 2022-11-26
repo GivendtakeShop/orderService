@@ -9,4 +9,4 @@ spring:
       platform: postgres
 
 springdoc:
-  packagesToScan: com.givendtake.orderService
+  packagesToScan: com.givendtake.orderMicroservice
