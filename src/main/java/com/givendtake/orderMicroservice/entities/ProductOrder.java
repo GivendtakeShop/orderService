@@ -1,12 +1,10 @@
 package com.givendtake.orderMicroservice.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -14,26 +12,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ProductOrder {
-
-    @EmbeddedId
-    private ProductOrderId id;
+@Table(name = "product_orders")
+@Builder
+public class ProductOrder extends BaseEntity{
 
 
     @ManyToOne
-    @MapsId("productId")
     private Product product;
 
     @ManyToOne
-    @MapsId("orderId")
     private Order order;
 
-
     private int productQuantity;
-}
 
-@Embeddable
-class ProductOrderId implements Serializable {
-    private String productId;
-    private String orderId;
 }

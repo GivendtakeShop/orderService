@@ -1,10 +1,15 @@
 package com.givendtake.orderMicroservice.controllers;
 
+import com.givendtake.orderMicroservice.commands.OrderCommand;
+import com.givendtake.orderMicroservice.dtos.OrderDTO;
 import com.givendtake.orderMicroservice.dtos.mappers.OrderMapper;
+import com.givendtake.orderMicroservice.entities.Order;
+import com.givendtake.orderMicroservice.repositories.OrderRepository;
 import com.givendtake.orderMicroservice.services.order.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 
@@ -14,6 +19,18 @@ import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 public class OrderController {
 
     private final OrderService orderService;
+    private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+
+    @PostMapping
+    public OrderDTO addOrder(@RequestBody OrderCommand orderCommand){
+        Order order = orderService.addOrder(orderCommand);
+        return orderMapper.orderToOrderDTO(order);
+    }
+
+    @GetMapping
+    public List<OrderDTO> getOrders(){
+        return orderRepository.findAll().stream().map(orderMapper::orderToOrderDTO).toList();
+    }
 
 }

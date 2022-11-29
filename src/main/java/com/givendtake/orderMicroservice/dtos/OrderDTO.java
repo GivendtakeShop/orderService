@@ -2,7 +2,6 @@ package com.givendtake.orderMicroservice.dtos;
 
 
 import com.givendtake.orderMicroservice.entities.OrderStatus;
-import com.givendtake.orderMicroservice.entities.ProductOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class OrderDTO {
 
     private String id;
-    private Date order;
+    private Date orderDate;
     private OrderStatus status;
-    private List<ProductOrder> productOrders;
+    private List<ProductOrderDTO> productOrders;
 }

@@ -1,14 +1,12 @@
 package com.givendtake.orderMicroservice.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 @Getter
@@ -17,13 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
+@EntityListeners(value = AuditingEntityListener.class)
 public class Order extends BaseEntity{
 
-    private Date date;
+    @CreatedDate
+    private Date orderDate;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.PENDING;
 
-    @OneToMany(mappedBy = "order")
-    private List<ProductOrder> productOrders;
+//    @OneToMany(mappedBy = "order")
+//    private List<ProductOrder> productOrders;
 }
