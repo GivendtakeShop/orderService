@@ -1,6 +1,7 @@
 package com.givendtake.orderMicroservice.entities;
 
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
