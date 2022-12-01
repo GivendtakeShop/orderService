@@ -51,7 +51,7 @@ class OrderMapperTest {
         productOrderDTOGiven.setProductQuantity(50);
 
         assertThat(productOrderDTO)
-                .as("testing product_order to its dto --------------")
+                .as("testing map product_order to its dto --------------")
                 .usingRecursiveComparison()
                 .isEqualTo(productOrderDTOGiven);
 
@@ -115,7 +115,7 @@ class OrderMapperTest {
 
         //Then
         assertThat(orderDTO)
-                .as("testing order to its dto")
+                .as("testing map order to its dto")
                 .usingRecursiveComparison()
                 .isEqualTo(orderDTOGiven);
     }
