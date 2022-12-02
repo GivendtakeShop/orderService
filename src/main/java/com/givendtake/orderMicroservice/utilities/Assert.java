@@ -5,6 +5,7 @@ import com.givendtake.orderMicroservice.exceptions.ExceptionPayload;
 import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,10 @@ public interface Assert {
     }
 
     static void assertNotEmpty(String value) {
+        if (value == null || value.isEmpty()) throw new BusinessException(payload);
+    }
+
+    static void assertNotEmpty(List<?> value) {
         if (value == null || value.isEmpty()) throw new BusinessException(payload);
     }
 
