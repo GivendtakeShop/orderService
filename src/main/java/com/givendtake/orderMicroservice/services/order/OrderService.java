@@ -11,4 +11,6 @@ public interface OrderService {
     Order addOrder(OrderCommand orderCommand);
 
     List<Order> getOrders();
+
+    Order getOrder(String id);
 }

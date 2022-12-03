@@ -3,6 +3,8 @@ package com.givendtake.orderMicroservice.services.order;
 import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.commands.mappers.OrderMapper;
 import com.givendtake.orderMicroservice.entities.Order;
+import com.givendtake.orderMicroservice.exceptions.BusinessException;
+import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
 import com.givendtake.orderMicroservice.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,5 +30,11 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> getOrders() {
 
         return orderRepository.findAll();
+    }
+
+    @Override
+    public Order getOrder(String id) {
+        return orderRepository.findById(id)
+                .orElseThrow(()-> new BusinessException(ExceptionPayloadFactory.ORDER_NOT_FOUND.get()));
     }
 }

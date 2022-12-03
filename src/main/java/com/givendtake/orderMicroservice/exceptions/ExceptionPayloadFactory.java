@@ -15,7 +15,10 @@ public enum ExceptionPayloadFactory {
     TECHNICAL_ERROR(0, HttpStatus.INTERNAL_SERVER_ERROR, "technical.error"),
 
     // Business Exception
-    INVALID_PAYLOAD(1, HttpStatus.BAD_REQUEST, "invalid.request.payload");
+    INVALID_PAYLOAD(1, HttpStatus.BAD_REQUEST, "invalid.request.payload"),
+
+    //Order Not Found Exception
+    ORDER_NOT_FOUND(2, HttpStatus.NOT_FOUND, "order.not.found");
 
    
 
