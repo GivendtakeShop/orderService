@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ExceptionPayloadFactory {
 
+    //Product not found Exception
+    PRODUCT_NOT_FOUND(-1, HttpStatus.NOT_FOUND, "product.not.found"),
+
     // Technical Exception
     TECHNICAL_ERROR(0, HttpStatus.INTERNAL_SERVER_ERROR, "technical.error"),
 
