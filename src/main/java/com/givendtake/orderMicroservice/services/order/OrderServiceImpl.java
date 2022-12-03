@@ -7,6 +7,8 @@ import com.givendtake.orderMicroservice.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
@@ -20,5 +22,11 @@ public class OrderServiceImpl implements OrderService{
         orderCommand.validate();
         Order order = orderMapper.orderCommandToOrder(orderCommand);
         return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> getOrders() {
+
+        return orderRepository.findAll();
     }
 }
