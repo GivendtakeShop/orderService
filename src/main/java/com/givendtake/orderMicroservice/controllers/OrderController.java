@@ -34,4 +34,9 @@ public class OrderController {
                 .toList();
     }
 
+    @GetMapping("/{id}")
+    public OrderDTO getOrder(@PathVariable String id){
+        return orderMapper.orderToOrderDTO(orderService.getOrder(id));
+    }
+
 }
