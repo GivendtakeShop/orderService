@@ -37,4 +37,10 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findById(id)
                 .orElseThrow(()-> new BusinessException(ExceptionPayloadFactory.ORDER_NOT_FOUND.get()));
     }
+
+    @Override
+    public void deleteOrder(String id) {
+        Order order = getOrder(id);
+        orderRepository.delete(order);
+    }
 }
