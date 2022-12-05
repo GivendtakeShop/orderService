@@ -6,11 +6,11 @@ import com.givendtake.orderMicroservice.dtos.mappers.OrderMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.services.order.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
 
 import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 
@@ -31,10 +31,9 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderDTO> getOrders(){
-        return orderService.getOrders()
-                .stream().map(orderMapper::orderToOrderDTO)
-                .toList();
+    public Page<OrderDTO> getOrders(@RequestParam("pageNb") int pageNb, @RequestParam("pageSize") int pageSize){
+        return orderService.getOrders(pageNb,pageSize)
+                .map(orderMapper::orderToOrderDTO);
     }
 
     @GetMapping("/{id}")

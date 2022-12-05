@@ -7,6 +7,10 @@ import com.givendtake.orderMicroservice.exceptions.BusinessException;
 import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
 import com.givendtake.orderMicroservice.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,9 +31,9 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<Order> getOrders() {
-
-        return orderRepository.findAll();
+    public Page<Order> getOrders(int pageNb, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNb, pageSize, Sort.by("orderDate").descending());
+        return orderRepository.findAll(pageable);
     }
 
     @Override
