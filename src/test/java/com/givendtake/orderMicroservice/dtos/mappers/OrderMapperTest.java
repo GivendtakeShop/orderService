@@ -6,12 +6,10 @@ import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
-import lombok.RequiredArgsConstructor;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -82,7 +80,7 @@ class OrderMapperTest {
         productOrders.add(productOrder1);
         productOrders.add(productOrder2);
 
-        Date orderDate = new Date();
+        String orderDate = "12/6/22, 1:38 AM";
 
         Order order =
                 Order.builder()
