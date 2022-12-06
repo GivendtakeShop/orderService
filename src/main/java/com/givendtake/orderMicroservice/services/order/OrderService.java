@@ -2,6 +2,8 @@ package com.givendtake.orderMicroservice.services.order;
 
 
 import com.givendtake.orderMicroservice.commands.OrderCommand;
+import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
+import com.givendtake.orderMicroservice.dtos.OrderDTO;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
 import org.springframework.data.domain.Page;
@@ -19,4 +21,5 @@ public interface OrderService {
 
     void deleteOrder(String id);
 
+    Order changeOrderStatus(String id, OrderStatusCommand statusCommand);
 }

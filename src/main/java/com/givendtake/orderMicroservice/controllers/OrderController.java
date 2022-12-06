@@ -1,6 +1,7 @@
 package com.givendtake.orderMicroservice.controllers;
 
 import com.givendtake.orderMicroservice.commands.OrderCommand;
+import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
 import com.givendtake.orderMicroservice.dtos.OrderDTO;
 import com.givendtake.orderMicroservice.dtos.mappers.OrderMapper;
 import com.givendtake.orderMicroservice.entities.Order;
@@ -55,9 +56,18 @@ public class OrderController {
                 .map(orderMapper::orderToOrderDTO);
     }
 
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDTO changeOrderStatus(@PathVariable String id, @RequestBody OrderStatusCommand statusCommand){
+        return orderMapper.orderToOrderDTO(orderService.changeOrderStatus(id, statusCommand));
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteOrder(@PathVariable String id){
         orderService.deleteOrder(id);
     }
+
+
 }
