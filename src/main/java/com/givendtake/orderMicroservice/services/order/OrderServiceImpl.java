@@ -1,6 +1,7 @@
 package com.givendtake.orderMicroservice.services.order;
 
 import com.givendtake.orderMicroservice.commands.OrderCommand;
+import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
 import com.givendtake.orderMicroservice.commands.mappers.OrderMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
@@ -12,10 +13,7 @@ import org.springframework.data.domain.*;
 import org.springframework.data.domain.ExampleMatcher.PropertyValueTransformer;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 @Service
 @RequiredArgsConstructor
@@ -61,9 +59,19 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Order changeOrderStatus(String id, OrderStatusCommand statusCommand) {
+        statusCommand.validate();
+        Order order = getOrder(id);
+        order.setStatus(statusCommand.getOrderStatus());
+
+        return orderRepository.save(order);
+    }
+
+    @Override
     public void deleteOrder(String id) {
         Order order = getOrder(id);
         orderRepository.delete(order);
     }
+
 
 }
