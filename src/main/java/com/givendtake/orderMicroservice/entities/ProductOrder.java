@@ -20,7 +20,6 @@ public class ProductOrder extends BaseEntity{
     @ManyToOne
     private Order order;
 
-
     private int productQuantity;
 }
 
