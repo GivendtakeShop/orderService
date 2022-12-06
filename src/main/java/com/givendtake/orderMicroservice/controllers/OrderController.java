@@ -4,6 +4,7 @@ import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.dtos.OrderDTO;
 import com.givendtake.orderMicroservice.dtos.mappers.OrderMapper;
 import com.givendtake.orderMicroservice.entities.Order;
+import com.givendtake.orderMicroservice.entities.OrderStatus;
 import com.givendtake.orderMicroservice.services.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 
+import static com.givendtake.orderMicroservice.constants.PageConstant.PAGE_NB;
+import static com.givendtake.orderMicroservice.constants.PageConstant.PAGE_SIZE;
 import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 
 @RestController
@@ -31,7 +35,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<OrderDTO> getOrders(@RequestParam("pageNb") int pageNb, @RequestParam("pageSize") int pageSize){
+    public Page<OrderDTO> getOrders(@RequestParam(defaultValue = PAGE_NB) int pageNb, @RequestParam(defaultValue = PAGE_SIZE) int pageSize){
         return orderService.getOrders(pageNb,pageSize)
                 .map(orderMapper::orderToOrderDTO);
     }
@@ -42,6 +46,14 @@ public class OrderController {
         return orderMapper.orderToOrderDTO(orderService.getOrder(id));
     }
 
+
+    @GetMapping("/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<OrderDTO> filterOrders(@RequestParam(defaultValue = PAGE_NB) int pageNb, @RequestParam(defaultValue = PAGE_SIZE) int pageSize,
+               @RequestParam(required = false) OrderStatus status, @RequestParam(required = false) String orderDate){
+        return orderService.filterOrders(pageNb, pageSize, status,orderDate)
+                .map(orderMapper::orderToOrderDTO);
+    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

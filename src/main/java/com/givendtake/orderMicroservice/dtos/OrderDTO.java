@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderDTO {
 
     private String id;
-    private Date orderDate;
+    private String orderDate;
     private OrderStatus status;
     private List<ProductOrderDTO> productOrders;
 }

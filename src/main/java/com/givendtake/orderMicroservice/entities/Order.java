@@ -21,7 +21,7 @@ import java.util.List;
 public class Order extends BaseEntity{
 
     @CreatedDate
-    private Date orderDate;
+    private String orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.PENDING;
