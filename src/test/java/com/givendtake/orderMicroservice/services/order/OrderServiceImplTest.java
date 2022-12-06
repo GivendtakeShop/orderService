@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -92,7 +93,7 @@ class OrderServiceImplTest {
         order.setProductOrders(productOrders);
 
 
-        when(orderMapper.orderCommandToOrder(orderCommand))
+        when(orderMapper.orderCommandToOrder(orderCommand, Optional.empty()))
                 .thenReturn(order);
 
         ArgumentCaptor<Order> argOrder = ArgumentCaptor.forClass(Order.class);
@@ -104,7 +105,7 @@ class OrderServiceImplTest {
 
         //then
 
-        verify(orderMapper).orderCommandToOrder(orderCommand);
+        verify(orderMapper).orderCommandToOrder(orderCommand,Optional.empty());
         verify(orderRepository).save(argOrder.capture());
         assertThat(argOrder.getValue())
                 .usingRecursiveComparison()

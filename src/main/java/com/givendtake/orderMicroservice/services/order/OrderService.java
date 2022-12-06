@@ -19,7 +19,11 @@ public interface OrderService {
 
     Page<Order> filterOrders(int pageNb, int pageSize, OrderStatus status, String orderDate);
 
-    void deleteOrder(String id);
+    Order updateOrder(String id, OrderCommand orderCommand);
 
     Order changeOrderStatus(String id, OrderStatusCommand statusCommand);
+
+    void deleteOrder(String id);
+
+
 }

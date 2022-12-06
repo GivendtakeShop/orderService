@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -93,7 +94,7 @@ class OrderMapperTest {
 
 
         //When
-        Order orderTest = orderMapper.orderCommandToOrder(orderCommand);
+        Order orderTest = orderMapper.orderCommandToOrder(orderCommand, Optional.empty());
 
         //Then
         verify(productOrderMapper,times(productOrderCommands.size())).productOrderCommandToProductOrder(any(ProductOrderCommand.class));

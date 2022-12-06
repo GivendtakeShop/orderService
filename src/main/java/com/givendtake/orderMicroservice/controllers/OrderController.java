@@ -57,6 +57,13 @@ public class OrderController {
     }
 
 
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDTO updateOrder(@PathVariable String id, @RequestBody OrderCommand orderCommand){
+        return orderMapper.orderToOrderDTO(orderService.updateOrder(id, orderCommand));
+    }
+
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO changeOrderStatus(@PathVariable String id, @RequestBody OrderStatusCommand statusCommand){
