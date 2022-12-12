@@ -5,14 +5,11 @@ import com.givendtake.orderMicroservice.commands.ProductOrderCommand;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
-import com.givendtake.orderMicroservice.services.product.ProductService;
-import com.givendtake.orderMicroservice.services.product.ProductServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +21,14 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class OrderMapperTest {
+class OrderMapperCommandTest {
 
 
     @Mock
-    private ProductOrderMapper productOrderMapper;
+    private ProductOrderCommandMapper productOrderMapper;
 
     @InjectMocks
-    private OrderMapper orderMapper;
+    private OrderCommandMapper orderMapper;
 
 
     @AfterEach

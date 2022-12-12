@@ -1,7 +1,6 @@
 package com.givendtake.orderMicroservice.commands.mappers;
 
 import com.givendtake.orderMicroservice.commands.ProductOrderCommand;
-import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
 import com.givendtake.orderMicroservice.services.product.ProductService;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ProductOrderMapper {
+public class ProductOrderCommandMapper {
     private final ProductService productService;
 
     public ProductOrder productOrderCommandToProductOrder(ProductOrderCommand productOrderCommand){

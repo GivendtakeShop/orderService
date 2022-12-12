@@ -2,11 +2,9 @@ package com.givendtake.orderMicroservice.services.order;
 
 import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
-import com.givendtake.orderMicroservice.commands.mappers.OrderMapper;
+import com.givendtake.orderMicroservice.commands.mappers.OrderCommandMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
-import com.givendtake.orderMicroservice.entities.Product;
-import com.givendtake.orderMicroservice.entities.ProductOrder;
 import com.givendtake.orderMicroservice.exceptions.BusinessException;
 import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
 import com.givendtake.orderMicroservice.repositories.OrderRepository;
@@ -14,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -24,7 +20,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService{
 
     private final OrderRepository orderRepository;
-    private final OrderMapper orderMapper;
+    private final OrderCommandMapper orderMapper;
 
     @Override
     public Order addOrder(OrderCommand orderCommand) {

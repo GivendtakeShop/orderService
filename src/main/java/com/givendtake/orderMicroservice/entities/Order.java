@@ -24,6 +24,7 @@ public class Order extends BaseEntity{
     private String orderDate;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private OrderStatus status = OrderStatus.PENDING;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)

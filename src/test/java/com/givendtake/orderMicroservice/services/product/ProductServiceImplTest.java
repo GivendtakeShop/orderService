@@ -40,8 +40,6 @@ class ProductServiceImplTest {
 
         Product product = new Product();
         product.setId(id);
-        product.setName("tshirt");
-        product.setPrice(50);
 
         when(productRepository.findById(id)).thenReturn(Optional.of(product));
 

@@ -1,8 +1,8 @@
-INSERT INTO public.products (id, name, price) VALUES ('1', 't_shirt', 100);
-INSERT INTO public.products (id, name, price) VALUES ('2', 'jean', 150);
-INSERT INTO public.products (id, name, price) VALUES ('3', 'sac', 200);
-INSERT INTO public.products (id, name, price) VALUES ('4', 'lifeplanner', 200);
-INSERT INTO public.products (id, name, price) VALUES ('5', 'capuchon ', 250);
+INSERT INTO public.products (id) VALUES ('1');
+INSERT INTO public.products (id) VALUES ('2');
+INSERT INTO public.products (id) VALUES ('3');
+INSERT INTO public.products (id) VALUES ('4');
+INSERT INTO public.products (id) VALUES ('5');
 
 INSERT INTO public.orders (id, order_date, status) VALUES ('df10b1b2-b0cb-4248-a8f2-06f26772e983', '12/6/22, 1:38 PM', 'PENDING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('fe8916b5-9486-408c-8a72-a620f453a5b8', '12/6/22, 1:38 AM', 'PENDING');

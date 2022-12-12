@@ -1,9 +1,10 @@
 spring:
   application:
     name: OrderService
-
   profiles:
     active: dev
 
+server:
+  port: 8081
 
 

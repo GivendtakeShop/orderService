@@ -3,7 +3,7 @@ package com.givendtake.orderMicroservice.controllers;
 import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
 import com.givendtake.orderMicroservice.dtos.OrderDTO;
-import com.givendtake.orderMicroservice.dtos.mappers.OrderMapper;
+import com.givendtake.orderMicroservice.dtos.mappers.OrderDTOMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
 import com.givendtake.orderMicroservice.services.order.OrderService;
@@ -12,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.Date;
 
 import static com.givendtake.orderMicroservice.constants.PageConstant.PAGE_NB;
 import static com.givendtake.orderMicroservice.constants.PageConstant.PAGE_SIZE;
@@ -25,7 +23,7 @@ import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 public class OrderController {
 
     private final OrderService orderService;
-    private final OrderMapper orderMapper;
+    private final OrderDTOMapper orderMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -75,6 +73,7 @@ public class OrderController {
     public void deleteOrder(@PathVariable String id){
         orderService.deleteOrder(id);
     }
+
 
 
 }

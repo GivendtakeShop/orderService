@@ -13,9 +13,9 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class OrderMapper {
+public class OrderCommandMapper {
 
-    private final ProductOrderMapper productOrderMapper;
+    private final ProductOrderCommandMapper productOrderMapper;
 
     public Order orderCommandToOrder(OrderCommand orderCommand, Optional<Order> optOrder) {
         Order order = optOrder.orElse(new Order());

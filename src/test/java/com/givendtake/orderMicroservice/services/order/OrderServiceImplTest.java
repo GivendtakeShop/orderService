@@ -3,7 +3,7 @@ package com.givendtake.orderMicroservice.services.order;
 
 import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.commands.ProductOrderCommand;
-import com.givendtake.orderMicroservice.commands.mappers.OrderMapper;
+import com.givendtake.orderMicroservice.commands.mappers.OrderCommandMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
@@ -32,7 +32,7 @@ class OrderServiceImplTest {
     private OrderRepository orderRepository;
 
     @Mock
-    private OrderMapper orderMapper;
+    private OrderCommandMapper orderMapper;
 
     @InjectMocks
     private OrderServiceImpl orderService;

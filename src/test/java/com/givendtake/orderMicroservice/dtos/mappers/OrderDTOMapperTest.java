@@ -7,73 +7,50 @@ import com.givendtake.orderMicroservice.entities.OrderStatus;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
 import static org.assertj.core.api.Assertions.*;
+import com.givendtake.orderMicroservice.proxies.beans.ProductBean;
+import com.givendtake.orderMicroservice.proxies.beans.ProductTypeBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = OrderMapperImpl.class)
-class OrderMapperTest {
+@ContextConfiguration(classes = OrderDTOMapperImpl.class)
+class OrderDTOMapperTest {
 
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderDTOMapper orderMapper;
 
-    @Test
-    void given_product_order_should_return_corresponding_product_order_dto() {
-        //Given
-        Product product = new Product();
-        product.setId("1");
-
-        ProductOrder productOrder =
-                ProductOrder.builder()
-                        .product(product)
-                        .productQuantity(50)
-                        .build();
-
-
-
-        //When
-        ProductOrderDTO productOrderDTO =
-                orderMapper.productOrderToProductOrderDTO(productOrder);
-
-        //Then
-        ProductOrderDTO productOrderDTOGiven = new ProductOrderDTO();
-        productOrderDTOGiven.setProductId("1");
-        productOrderDTOGiven.setProductQuantity(50);
-
-        assertThat(productOrderDTO)
-                .as("testing map product_order to its dto --------------")
-                .usingRecursiveComparison()
-                .isEqualTo(productOrderDTOGiven);
-
-
-    }
 
     @Test
     void given_order_should_return_corresponding_order_dto() {
         //Given
+        String productId1 = "1";
+        int productQuantity1 = 100;
+
+        String productId2 = "2";
+        int productQuantity2 = 50;
+
+
         Product product1 = new Product();
-        product1.setId("1");
+        product1.setId(productId1);
 
         Product product2 = new Product();
-        product2.setId("2");
+        product2.setId(productId2);
 
         ProductOrder productOrder1 =
                 ProductOrder.builder()
                         .product(product1)
-                        .productQuantity(100)
+                        .productQuantity(productQuantity1)
                         .build();
         ProductOrder productOrder2 =
                 ProductOrder.builder()
                         .product(product2)
-                        .productQuantity(50)
+                        .productQuantity(productQuantity2)
                         .build();
 
         List<ProductOrder> productOrders = new ArrayList<>();
@@ -82,6 +59,7 @@ class OrderMapperTest {
 
         String orderDate = "12/6/22, 1:38 AM";
 
+        //****
         Order order =
                 Order.builder()
                         .orderDate(orderDate)
@@ -89,15 +67,36 @@ class OrderMapperTest {
                         .productOrders(productOrders)
                         .build();
 
-        //tested with objects
+
+
+        ProductBean productBean1 = new ProductBean();
+        productBean1.setId(productId1);
+        productBean1.setName("tshirt");
+        productBean1.setPrice(50);
+        productBean1.setType(ProductTypeBean.CLOTHES);
+        productBean1.setDescription("erer");
 
         ProductOrderDTO productOrderDTO1 = new ProductOrderDTO();
-        productOrderDTO1.setProductId("1");
-        productOrderDTO1.setProductQuantity(100);
+        productOrderDTO1.setProductQuantity(productQuantity1);
+        productOrderDTO1.setProduct(productBean1);
+
+
+        ProductBean productBean2 = new ProductBean();
+        productBean2.setId(productId2);
+        productBean2.setName("fdfsd");
+        productBean2.setPrice(500);
+        productBean2.setType(ProductTypeBean.CLOTHES);
+        productBean2.setDescription("fsd");
 
         ProductOrderDTO productOrderDTO2 = new ProductOrderDTO();
-        productOrderDTO2.setProductId("2");
-        productOrderDTO2.setProductQuantity(50);
+        productOrderDTO2.setProductQuantity(productQuantity2);
+        productOrderDTO2.setProduct(productBean2);
+
+
+        //When
+        OrderDTO orderDTO = orderMapper.orderToOrderDTO(order);
+
+        //Then
 
         List<ProductOrderDTO> productOrderDTOS = new ArrayList<>();
         productOrderDTOS.add(productOrderDTO1);
@@ -108,31 +107,11 @@ class OrderMapperTest {
         orderDTOGiven.setStatus(OrderStatus.PENDING);
         orderDTOGiven.setProductOrders(productOrderDTOS);
 
-        //When
-        OrderDTO orderDTO = orderMapper.orderToOrderDTO(order);
-
-        //Then
+        //****
         assertThat(orderDTO)
                 .as("testing map order to its dto")
                 .usingRecursiveComparison()
                 .isEqualTo(orderDTOGiven);
     }
 
-    @Test
-    void given_product_should_return_its_id() {
-        //Given
-        Product product =
-                Product.builder()
-                        .price(50)
-                        .name("T-shirt")
-                        .build();
-        product.setId("1");
-        //When
-        String id = orderMapper.getProductId(product);
-
-        //Then
-        assertThat(id)
-                .as("Testing getProductId ----------------")
-                        .isEqualTo(product.getId());
-    }
 }
