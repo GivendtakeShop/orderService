@@ -1,8 +1,8 @@
-INSERT INTO public.products (id, name, price) VALUES ('1', 't_shirt', 100);
-INSERT INTO public.products (id, name, price) VALUES ('2', 'jean', 150);
-INSERT INTO public.products (id, name, price) VALUES ('3', 'sac', 200);
-INSERT INTO public.products (id, name, price) VALUES ('4', 'lifeplanner', 200);
-INSERT INTO public.products (id, name, price) VALUES ('5', 'capuchon ', 250);
+INSERT INTO public.products (id, quantity) VALUES ('1', 50);
+INSERT INTO public.products (id, quantity) VALUES ('2', 100);
+INSERT INTO public.products (id, quantity) VALUES ('3', 100);
+INSERT INTO public.products (id, quantity) VALUES ('4', 50);
+INSERT INTO public.products (id, quantity) VALUES ('5', 5);
 
 INSERT INTO public.orders (id, order_date, status) VALUES ('df10b1b2-b0cb-4248-a8f2-06f26772e983', '12/6/22, 1:38 PM', 'PENDING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('fe8916b5-9486-408c-8a72-a620f453a5b8', '12/6/22, 1:38 AM', 'PENDING');
@@ -10,11 +10,11 @@ INSERT INTO public.orders (id, order_date, status) VALUES ('5c4ada29-1f25-4afe-b
 INSERT INTO public.orders (id, order_date, status) VALUES ('84132c5b-24c3-478b-8fde-34cd23c774ea', '12/2/22, 1:38 AM', 'PENDING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('5e719638-950f-4a3a-b8bf-667f1a4ff296', '12/2/22, 1:38 AM', 'PENDING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('2ad2f777-4a78-401c-b061-d32604ddd68c', '12/5/22, 1:38 AM', 'DELIVERED');
-INSERT INTO public.orders (id, order_date, status) VALUES ('5cedeff9-8b91-40f9-b86c-7e4adcdb0d58', '12/1/22, 1:38 AM', 'CONFIRMED');
+INSERT INTO public.orders (id, order_date, status) VALUES ('5cedeff9-8b91-40f9-b86c-7e4adcdb0d58', '12/1/22, 1:38 AM', 'DELIVERING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('9918424c-ddcf-41aa-9b29-7e61b730abf7', '12/1/22, 1:38 AM', 'DELIVERED');
 INSERT INTO public.orders (id, order_date, status) VALUES ('a859a3c0-dc06-4c2d-a9af-d98ccaebafc1', '12/1/22, 1:38 AM', 'DELIVERED');
-INSERT INTO public.orders (id, order_date, status) VALUES ('2ba1f9eb-1c9a-4503-b26a-c76fcdb2e2e8', '12/4/22, 1:38 AM', 'CONFIRMED');
-INSERT INTO public.orders (id, order_date, status) VALUES ('2d50e7e6-845a-4178-ac98-b763fd388b70', '12/6/22, 1:38 AM', 'CONFIRMED');
+INSERT INTO public.orders (id, order_date, status) VALUES ('2ba1f9eb-1c9a-4503-b26a-c76fcdb2e2e8', '12/4/22, 1:38 AM', 'DELIVERING');
+INSERT INTO public.orders (id, order_date, status) VALUES ('2d50e7e6-845a-4178-ac98-b763fd388b70', '12/6/22, 1:38 AM', 'DELIVERING');
 INSERT INTO public.orders (id, order_date, status) VALUES ('dedb5cbe-21a2-4552-a4b1-4d1c3a1b1e17', '12/6/22, 1:38 AM', 'DELIVERED');
 
 INSERT INTO public.product_orders (id, product_quantity, order_id, product_id) VALUES ('545b6623-f84f-491e-8cab-29fa0945f0f5', 4, 'fe8916b5-9486-408c-8a72-a620f453a5b8', '3');

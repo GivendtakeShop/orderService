@@ -24,6 +24,7 @@ public class OrderMapper {
                 .stream().map(productOrderMapper::productOrderCommandToProductOrder)
                 .toList());
         productOrders.forEach(el -> el.setOrder(order));
+        order.clearProductOrders();
         order.setProductOrders(productOrders);
 
         return order;

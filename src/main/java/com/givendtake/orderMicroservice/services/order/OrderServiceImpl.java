@@ -3,19 +3,20 @@ package com.givendtake.orderMicroservice.services.order;
 import com.givendtake.orderMicroservice.commands.OrderCommand;
 import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
 import com.givendtake.orderMicroservice.commands.mappers.OrderMapper;
+import com.givendtake.orderMicroservice.components.AddState;
+import com.givendtake.orderMicroservice.components.MinusStatus;
+import com.givendtake.orderMicroservice.components.ProductQuantityContext;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
-import com.givendtake.orderMicroservice.entities.Product;
-import com.givendtake.orderMicroservice.entities.ProductOrder;
 import com.givendtake.orderMicroservice.exceptions.BusinessException;
 import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
 import com.givendtake.orderMicroservice.repositories.OrderRepository;
+import com.givendtake.orderMicroservice.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -25,13 +26,19 @@ public class OrderServiceImpl implements OrderService{
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final ProductService productService;
+    private final ProductQuantityContext productQuantityContext;
 
     @Override
+    @Transactional
     public Order addOrder(OrderCommand orderCommand) {
 
         orderCommand.validate();
         Order order = orderMapper.orderCommandToOrder(orderCommand,Optional.empty());
-        return orderRepository.save(order);
+        productQuantityContext.setState(new MinusStatus());
+        productService.updateProductQuantity(order);
+        order = orderRepository.save(order);
+        return order;
     }
 
     @Override
@@ -63,10 +70,17 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    @Transactional
     public Order updateOrder(String id, OrderCommand orderCommand) {
         orderCommand.validate();
+
         Order order = getOrder(id);
+        productQuantityContext.setState(new AddState());
+        productService.updateProductQuantity(order);
+
         order = orderMapper.orderCommandToOrder(orderCommand, Optional.of(order));
+        productQuantityContext.setState(new MinusStatus());
+        productService.updateProductQuantity(order);
 
         return orderRepository.save(order);
     }
@@ -83,9 +97,13 @@ public class OrderServiceImpl implements OrderService{
 
 
     @Override
+    @Transactional
     public void deleteOrder(String id) {
         Order order = getOrder(id);
+        productQuantityContext.setState(new AddState());
+        productService.updateProductQuantity(order);
         orderRepository.delete(order);
+
     }
 
 

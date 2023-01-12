@@ -28,6 +28,10 @@ public interface Assert {
         if (value == null || !Pattern.compile(regex).matcher(value).matches()) throw new BusinessException(payload);
     }
 
+    static void assertLessThan(int value, int max) {
+        if (value>max) throw new BusinessException(payload);
+    }
+
     static void assertMinSize(Collection<?> value, int min) {
         if (value == null || value.size() < min) throw new BusinessException(payload);
     }

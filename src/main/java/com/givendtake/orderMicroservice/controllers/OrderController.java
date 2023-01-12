@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public OrderDTO getOrder(@PathVariable String id){
         return orderMapper.orderToOrderDTO(orderService.getOrder(id));
     }
