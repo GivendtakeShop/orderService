@@ -17,4 +17,6 @@ public class ProductBean {
     private long price;
     private ProductTypeBean type;
     private String description;
+    private int quantity;
+
 }

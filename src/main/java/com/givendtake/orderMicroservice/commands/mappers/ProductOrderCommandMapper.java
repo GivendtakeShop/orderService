@@ -3,6 +3,8 @@ package com.givendtake.orderMicroservice.commands.mappers;
 import com.givendtake.orderMicroservice.commands.ProductOrderCommand;
 import com.givendtake.orderMicroservice.entities.Product;
 import com.givendtake.orderMicroservice.entities.ProductOrder;
+import com.givendtake.orderMicroservice.proxies.ProductProxy;
+import com.givendtake.orderMicroservice.proxies.beans.ProductBean;
 import com.givendtake.orderMicroservice.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class ProductOrderCommandMapper {
-    private final ProductService productService;
+    private final ProductProxy productProxy;
 
     public ProductOrder productOrderCommandToProductOrder(ProductOrderCommand productOrderCommand){
-        Product p = productService.findById(productOrderCommand.getProductId());
+        ProductBean p = productProxy.getProduct(productOrderCommand.getProductId());
         return ProductOrder.builder()
-                .product(p)
+                .productId(productOrderCommand.getProductId())
                 .productQuantity(productOrderCommand.getProductQuantity())
                 .build();
     }

@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Builder
 public class ProductOrder extends BaseEntity{
 
-    @ManyToOne
-    private Product product;
+
+    private String productId;
 
     @ManyToOne
     private Order order;

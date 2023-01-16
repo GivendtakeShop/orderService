@@ -22,7 +22,7 @@ public class ProductOrderDTOMapper {
 
         ProductOrderDTO productOrderDTO = new ProductOrderDTO();
 
-        productOrderDTO.setProduct( productProxy.getProduct( source.getProduct().getId() ) );
+        productOrderDTO.setProduct( productProxy.getProduct( source.getProductId() ) );
         productOrderDTO.setProductQuantity( source.getProductQuantity() );
 
         return productOrderDTO;

@@ -5,8 +5,11 @@ import com.givendtake.orderMicroservice.commands.OrderStatusCommand;
 import com.givendtake.orderMicroservice.commands.mappers.OrderCommandMapper;
 import com.givendtake.orderMicroservice.entities.Order;
 import com.givendtake.orderMicroservice.entities.OrderStatus;
+import com.givendtake.orderMicroservice.entities.ProductOrder;
 import com.givendtake.orderMicroservice.exceptions.BusinessException;
 import com.givendtake.orderMicroservice.exceptions.ExceptionPayloadFactory;
+import com.givendtake.orderMicroservice.proxies.ProductProxy;
+import com.givendtake.orderMicroservice.proxies.beans.ProductBean;
 import com.givendtake.orderMicroservice.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -21,13 +24,21 @@ public class OrderServiceImpl implements OrderService{
 
     private final OrderRepository orderRepository;
     private final OrderCommandMapper orderMapper;
+    private final ProductProxy productProxy;
 
     @Override
     public Order addOrder(OrderCommand orderCommand) {
 
         orderCommand.validate();
         Order order = orderMapper.orderCommandToOrder(orderCommand,Optional.empty());
-        return orderRepository.save(order);
+        orderRepository.save(order);
+        boolean tansactionValid = true;
+        for (ProductOrder p: order.getProductOrders() ) {
+            ProductBean productBean = productProxy.updateQuantity(p.getProductId(),p.getProductQuantity());
+
+        }
+
+        return order;
     }
 
     @Override
