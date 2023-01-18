@@ -7,7 +7,7 @@ import lombok.Getter;
 import static com.givendtake.orderMicroservice.utilities.Assert.assertNotNull;
 
 @Getter
-public class OrderStatusCommand implements Validatable {
+public class OrderStatusCommand implements Validatable{
     private OrderStatus orderStatus;
 
     @Override

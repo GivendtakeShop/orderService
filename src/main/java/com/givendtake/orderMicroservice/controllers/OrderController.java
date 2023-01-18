@@ -19,7 +19,7 @@ import static com.givendtake.orderMicroservice.constants.PathConstant.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(API+V1+ORDER)
+@RequestMapping(V1+ORDER)
 public class OrderController {
 
     private final OrderService orderService;
