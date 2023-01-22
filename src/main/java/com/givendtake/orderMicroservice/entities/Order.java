@@ -25,7 +25,7 @@ public class Order extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private OrderStatus status = OrderStatus.PENDING;
+    private OrderStatus status = OrderStatus.DELIVERING;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<ProductOrder> productOrders;
